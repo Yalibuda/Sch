@@ -3,7 +3,21 @@
 >核心使用二次線性規劃，疊代過程使用隨機限制讓每次線性規劃能有不同的結果。
 
 ## 流程
+```mermaid
+graph TB
+start --> A[<center>1st LP</br>1. 對前n天排線體&平衡</br>2. 所有工單排線體&平衡]
+A --> B[<center>2nd LP</br>對一般工單排投入時間]
+B --> C[<center>插入 Forbid/ EPR]
+C --> D["<center>線內調動工單</br>(新工單和非使用者指定時間的工單)"]
+D --> E["<center>檢查有無違反資源或製程限制"]
+E --> F{滿足執行數}
+F --N, 找出次佳解--> A
+F --Y--> End
+subgraph 
+id1((start)) --> id2
+end
 
+```
 
 ## 基本的輸入與輸出
 ### Input file
@@ -40,5 +54,6 @@ VAR.NAME | 線性規劃的變數代碼
 LINE.STAMP | 投入線體
 Remark | 確認投入時間是否晚於最晚投入日
 Msg | 排程衝突，例如: 載具/ 人力衝突
+
 
 
